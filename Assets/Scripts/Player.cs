@@ -125,22 +125,31 @@ public class Player : MonoBehaviour
         Dash(rb);
     }
 
-    /**
+    /*
     * This function handles the dash mechanic
-    * when a button (space bar) is triggered.
+    * when spacebar is triggered.
     * The function will be effective for a short time
-    * so that the player does not end up using it every time
-    * s/he wants, but when it is available.
+    * so that the player does not end up spamming the spacebar.
     */
     private void Dash(Rigidbody2D rb) {
+        /*
+        * In the case where the dash mechanic is not available,
+        * Don't use it.
+        */
         if (dashCount <= 0) {
             dashCount = startDashCount;
             rb.velocity = Vector2.zero;
         }
-
+        /* 
+        * Available? Use it if spacebar is triggered.
+        */
         else {
             if (Input.GetKeyDown(KeyCode.Space)) {
-                rb.velocity = new Vector2(input * (15*speed), rb.velocity.y);
+                /* 
+                * Let us update the velocity of our rigidbody so we can
+                * perform a speed changecof our x-axis when spacebar is triggered.
+                */
+                rb.velocity = new Vector2(input * (20*speed), rb.velocity.y);
                 dashCount -= Time.deltaTime;
             }
         }
