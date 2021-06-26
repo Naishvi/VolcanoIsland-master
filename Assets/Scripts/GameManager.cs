@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
     Spawner spawner;
 
     /// <summary>
+
     /// Function for updating the Health UI text during gameplay.
     /// </summary>
     /// <param name="health">The Health value to display in the UI</param>
@@ -97,6 +98,7 @@ public class GameManager : MonoBehaviour
         spawner = GameObject.FindGameObjectWithTag("Spawner").GetComponent<Spawner>();
         player.reset();
         spawner.reset();
+        
     }
 
     /// <summary>
