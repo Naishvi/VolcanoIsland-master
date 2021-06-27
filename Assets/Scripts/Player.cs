@@ -178,7 +178,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void takeHealth(int value) {
+    public void HealUp(int value) {
         health += value;
         GameManager.instance().updateHealthText(health);
 

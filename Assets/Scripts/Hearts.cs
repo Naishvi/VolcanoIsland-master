@@ -1,13 +1,11 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Enemy Class.
-/// Contains movement and collision detection for the spawned enemy gameobjects.
-/// </summary>
 [RequireComponent(typeof(Collider))]
-public class Heart : MonoBehaviour
+
+public class Hearts : MonoBehaviour
 {
 
     //reference to the player script
@@ -21,7 +19,7 @@ public class Heart : MonoBehaviour
     /// <summary>
     /// Amount of damage that the enemy does to the player
     /// </summary>
-    public int health;
+    public int lives;
 
     /// <summary>
     /// Minimum possible speed for Enemy movement.
@@ -79,7 +77,7 @@ public class Heart : MonoBehaviour
         if (collision.tag == "Player")
         {
             //reduce player health
-            p.takeHealth(health);
+            p.HealUp(lives);
             Instantiate(hitEffect, new Vector3(transform.position.x, transform.position.y - 0.3f, -0.3f), Quaternion.identity);
             GameObject.Destroy(gameObject);
         }
