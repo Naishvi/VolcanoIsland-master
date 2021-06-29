@@ -81,6 +81,8 @@ public class Enemy : MonoBehaviour
         speed = Random.Range(minSpeed, maxSpeed);
 
         p = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
+        this.transform.rotation = Quaternion.Euler(0,0,getRotation(transform.position));
     }
 
     /// <summary>
@@ -114,5 +116,15 @@ public class Enemy : MonoBehaviour
             Instantiate(deathEffect, new Vector3(transform.position.x, transform.position.y - 0.5f, -0.3f), Quaternion.identity);
             GameObject.Destroy(gameObject);
         }
+    }
+
+    // Calculates the angle needed to get to the player's expected position
+    public float getRotation(Vector3 pos)
+    {
+        Vector3 expectedPos = p.expectedPosition();
+        float direction = Mathf.Rad2Deg * Mathf.Atan2(pos.y - expectedPos.y, pos.x - expectedPos.x);
+        direction = -(90 - direction);
+
+        return Mathf.Clamp(direction, -30, 30);
     }
 }

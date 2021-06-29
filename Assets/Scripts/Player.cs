@@ -204,4 +204,24 @@ public class Player : MonoBehaviour
         GameManager.instance().updateHealthText(health);
         this.gameObject.SetActive(true);
     }
+
+    // Guesses the player's expected position using input to
+    // know what direction the player is moving
+    public Vector3 expectedPosition()
+    {
+        Vector3 pos = transform.position;
+
+        input = Input.GetAxisRaw("Horizontal");
+
+        if(input < 0)
+        {
+            pos.x = pos.x + 1;
+        }
+        else if(input > 0)
+        {
+            pos.x = pos.x - 1;
+        }
+        
+        return pos;
+    }
 }
