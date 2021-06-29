@@ -40,7 +40,8 @@ public class Spawner : MonoBehaviour
     /// Array that contains all of the currently active enemy objects.
     /// </summary>
     public GameObject[] enemies;
-    public GameObject[] heart;
+
+    private float min = -5f, max = 5f;
 
     /// <summary>
     /// Time to wait between spawning enemy objects.
@@ -62,12 +63,19 @@ public class Spawner : MonoBehaviour
     /// </summary>
     private float spawnTimer;
 
+    public GameObject[] hearts;
+    public float healthDecreaseAmt;
+    public float healthTimeBetweenSpawns;
+    public float healthMinSpawnTime;
+    private float healthSpawnTimer;
+
     /// <summary>
     /// sets the spawning timer to 0 so that an enemy will spawn immediately.
     /// </summary>
     void Start()
     {
         spawnTimer = 0f;
+        healthSpawnTimer = 1f;  //0 for now change the frequency later
     }
 
     /// <summary>
@@ -82,9 +90,7 @@ public class Spawner : MonoBehaviour
             return;
         }
         if (spawnTimer <= 0) {
-            //spawn a enemy
-            float min = -5f;
-            float max = 5f;
+            //spawn an enemy
             GameObject enemy = enemies[Random.Range(0, enemies.Length)];
             float value = Random.Range(min, max);
             Vector3 position = new Vector3(value, 6.5f, 0f);
@@ -101,12 +107,29 @@ public class Spawner : MonoBehaviour
             spawnTimer -= Time.deltaTime;
         }
 
+        if(healthSpawnTimer <= 0){
+            //spawn health
+            GameObject heart = hearts[Random.Range(0, hearts.Length)];
+            float value = Random.Range(min, max);
+            Vector3 position = new Vector3(value, 6.5f, 0f);
+            Instantiate(heart, new Vector3(position.x, position.y, 0f), Quaternion.identity);
+
+            healthTimeBetweenSpawns -= healthDecreaseAmt;
+            if(healthTimeBetweenSpawns < healthMinSpawnTime){
+                healthTimeBetweenSpawns = healthMinSpawnTime;
+            }
+
+            healthSpawnTimer = healthTimeBetweenSpawns;
+        }else{
+            healthSpawnTimer -= Time.deltaTime;
+        }
+
     }
 
     /// <summary>
     /// Resets the timeBetweenSpawns back to the initial value.
     /// </summary>
-    public void reset() {
+    public void reset(){
         timeBetweenSpawns=1.25f;
     }
 }
