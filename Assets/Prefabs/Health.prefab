@@ -123,13 +123,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6116738865718671595}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5dbb04068cab9b44b4ba0fc1aaa2425, type: 3}
+  m_Script: {fileID: 11500000, guid: cd59b7ab8a0fdaf4985a4e90c9fb9b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   healthIncrease: 1
-  minSpeed: 3
-  maxSpeed: 7
-  deathEffect: {fileID: 0}
+  minSpeed: 1
+  maxSpeed: 1
+  deathEffect: {fileID: 1359528260042121863, guid: c2b6ad87e20d14339ab3ce573173d34a,
+    type: 3}
 --- !u!58 &-4185400787435119178
 CircleCollider2D:
   m_ObjectHideFlags: 0
