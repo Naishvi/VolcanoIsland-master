@@ -41,7 +41,7 @@ public class Spawner : MonoBehaviour
     /// </summary>
     public GameObject[] enemies;
 
-    //private float min = -5f, max = 5f;
+    private float min = -5f, max = 5f;
 
     /// <summary>
     /// Time to wait between spawning enemy objects.
@@ -90,9 +90,7 @@ public class Spawner : MonoBehaviour
         if (GameObject.FindGameObjectWithTag("Player") == null || GameObject.FindGameObjectWithTag("Player").activeSelf==false) {
             return;
         }
-        if (spawnTimer <= 0) {
-            float min = -5f;
-            float max = 5f; 
+        if (spawnTimer <= 0) { 
             //spawn an enemy
             GameObject enemy = enemies[Random.Range(0, enemies.Length)];
             float value = Random.Range(min, max);
@@ -111,8 +109,6 @@ public class Spawner : MonoBehaviour
         }
 
         if(healthSpawnTimer <= 0){
-            float min = -5f;
-            float max = 5f; 
             //spawn health
             GameObject heart = hearts[Random.Range(0, hearts.Length)];
             float value = Random.Range(min, max);
